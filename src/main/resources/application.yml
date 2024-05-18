@@ -2,9 +2,9 @@ spring:
   application:
     name: diplom-project
   datasource:
-    url: jdbc:postgresql://${STUDENTS_DB_HOST}/${STUDENTS_DB_NAME}
-    username: ${STUDENTS_BD_USER}
-    password: ${STUDENTS_DB_PASSWORD}
+    url: jdbc:postgresql://${SHOP_DB_HOST}/${SHOP_DB_NAME}
+    username: ${SHOP_BD_USER}
+    password: ${SHOP_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
