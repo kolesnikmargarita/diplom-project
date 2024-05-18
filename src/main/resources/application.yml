@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: diplom-project
+  datasource:
+    url: jdbc:postgresql://${STUDENTS_DB_HOST}/${STUDENTS_DB_NAME}
+    username: ${STUDENTS_BD_USER}
+    password: ${STUDENTS_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: liquibase/changelog-master.xml
+app:
+  jwt:
+    expirationMs: 604800000
+    secret: defaultdefaultdefaultdefaultdefaultdefault
