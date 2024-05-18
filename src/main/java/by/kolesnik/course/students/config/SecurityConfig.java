@@ -1,6 +1,6 @@
 package by.kolesnik.course.students.config;
 
-import by.kolesnik.students.filter.JwtAuthenticationFilter;
+import by.kolesnik.course.students.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
