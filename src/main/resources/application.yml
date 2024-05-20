@@ -3,12 +3,12 @@ spring:
     name: diplom-project
   datasource:
     url: jdbc:postgresql://${SHOP_DB_HOST}/${SHOP_DB_NAME}
-    username: ${SHOP_BD_USER}
+    username: ${SHOP_DB_USER}
     password: ${SHOP_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
   liquibase:
     change-log: liquibase/changelog-master.xml
 app:
