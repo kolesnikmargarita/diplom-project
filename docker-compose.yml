@@ -7,9 +7,9 @@ services:
     ports:
       - '5433:5432'
     environment:
-      POSTGRES_DB: diplom-project
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Umbrella:)
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     networks:
       - shop-network
   backend:
@@ -17,9 +17,9 @@ services:
     ports:
       - '8080:8080'
     environment:
-      SHOP_DB_USER: postgres
-      SHOP_DB_PASSWORD: Umbrella:)
-      SHOP_DB_NAME: diplom-project
+      SHOP_DB_USER: ${DATABASE_USER}
+      SHOP_DB_PASSWORD: ${DATABASE_PASSWORD}
+      SHOP_DB_NAME: ${DATABASE_NAME}
       SHOP_DB_HOST: database:5432
     depends_on:
       - database
