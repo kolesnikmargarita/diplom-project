@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres
+    container_name: database
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: diplom-project
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Umbrella:)
+    networks:
+      - shop-network
+  backend:
+    image: diplom-project
+    ports:
+      - '8080:8080'
+    environment:
+      SHOP_DB_USER: postgres
+      SHOP_DB_PASSWORD: Umbrella:)
+      SHOP_DB_NAME: diplom-project
+      SHOP_DB_HOST: database:5432
+    depends_on:
+      - database
+    networks:
+      - shop-network
+networks:
+  shop-network:
+    driver: bridge
