@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.Collection;
 
-@Entity(name = "commodity")
-@Table(name = "commodity")
+@Entity(name = "commodities")
+@Table(name = "commodities")
 @Data
 public class Commodity {
 
@@ -31,6 +31,6 @@ public class Commodity {
     private Collection<User> users;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category")
     private Category category;
 }

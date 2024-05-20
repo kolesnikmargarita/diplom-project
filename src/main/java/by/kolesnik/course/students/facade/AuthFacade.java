@@ -3,6 +3,8 @@ package by.kolesnik.course.students.facade;
 import by.kolesnik.course.students.dto.LoginRequestDto;
 import by.kolesnik.course.students.dto.RegisterRequestDto;
 import by.kolesnik.course.students.dto.TokenResponseDto;
+import by.kolesnik.course.students.entity.User;
+import by.kolesnik.course.students.mapper.UserMapper;
 import by.kolesnik.course.students.service.AuthService;
 import by.kolesnik.course.students.service.JwtService;
 import by.kolesnik.course.students.service.UserService;
@@ -30,14 +32,13 @@ public class AuthFacade {
     @Transactional
     public TokenResponseDto register(RegisterRequestDto dto) {
 
-        final String username = dto.getUsername();
-        final String password = dto.getPassword();
+        final User user = UserMapper.toEntity(dto);
 
         // создание пользователя
-        userService.createUser(username, password);
-        authService.login(username, password);
+        userService.createUser(user);
+        authService.login(user.getEmail(), user.getPassword());
 
         // token generation
-        return jwtService.generateToken(username);
+        return jwtService.generateToken(user.getEmail());
     }
 }

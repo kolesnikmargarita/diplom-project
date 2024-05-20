@@ -36,6 +36,6 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "cart",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "commondity_id"))
+            inverseJoinColumns = @JoinColumn(name = "commodity_id"))
     private Collection<Commodity> commodities;
 }
