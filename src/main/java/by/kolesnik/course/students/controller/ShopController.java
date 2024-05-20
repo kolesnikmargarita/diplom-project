@@ -30,7 +30,7 @@ public class ShopController {
         return categoriesFacade.getAll();
     }
 
-    @GetMapping("/{categoryName}")
+    @GetMapping("/categories/{categoryName}")
     public List<CommodityDto> getCommodities(@PathVariable String categoryName) {
         return commoditiesFacade.findByCategory(categoryName);
     }
