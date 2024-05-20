@@ -62,10 +62,10 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_category"/>
             </column>
             <column name="name" type="VARCHAR">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="category" baseTableName="commodities" constraintName="fk_category" referencedColumnNames="id" referencedTableName="categories" />
+        <addForeignKeyConstraint baseColumnNames="category" baseTableName="commodities" constraintName="fk_category_to_commodities" referencedColumnNames="id" referencedTableName="categories" />
 
         <createTable tableName="cart">
             <column name="user_id" type="BIGINT">
@@ -75,8 +75,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="cart" constraintName="fk_cart" referencedColumnNames="id" referencedTableName="users" />
-        <addForeignKeyConstraint baseColumnNames="commodity_id" baseTableName="cart" constraintName="fk_cart" referencedColumnNames="id" referencedTableName="commodities" />
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="cart" constraintName="fk_cart_to_users" referencedColumnNames="id" referencedTableName="users" />
+        <addForeignKeyConstraint baseColumnNames="commodity_id" baseTableName="cart" constraintName="fk_cart_to_commodities" referencedColumnNames="id" referencedTableName="commodities" />
 
     </changeSet>
 </databaseChangeLog>
