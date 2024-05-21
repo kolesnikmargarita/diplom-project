@@ -26,6 +26,12 @@ public class UserService {
         return user;
     }
 
+    @Transactional
+    public User updateUser(User user) {
+        userRepository.save(user);
+        return user;
+    }
+
     public User findByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isEmpty()) {

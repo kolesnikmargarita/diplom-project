@@ -1,6 +1,5 @@
 package by.kolesnik.course.students.repository;
 
-import by.kolesnik.course.students.dto.CommodityDto;
 import by.kolesnik.course.students.entity.Category;
 import by.kolesnik.course.students.entity.Commodity;
 import org.springframework.data.jpa.repository.JpaRepository;

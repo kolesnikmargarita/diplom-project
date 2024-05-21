@@ -1,6 +1,8 @@
 package by.kolesnik.course.students.mapper;
 
+import by.kolesnik.course.students.Role;
 import by.kolesnik.course.students.dto.RegisterRequestDto;
+import by.kolesnik.course.students.dto.UserRegistrationDto;
 import by.kolesnik.course.students.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,6 @@ public class UserMapper {
         user.setPassword(dto.getPassword());
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
-        user.setRole(dto.getRole());
 
         return user;
     }

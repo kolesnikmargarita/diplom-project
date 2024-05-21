@@ -1,6 +1,9 @@
 package by.kolesnik.course.students.facade;
 
-import by.kolesnik.course.students.dto.CategoryDto;
+import by.kolesnik.course.students.dto.category.CategoryAddDto;
+import by.kolesnik.course.students.dto.category.CategoryGetDto;
+import by.kolesnik.course.students.dto.category.CategoryUpdateDto;
+import by.kolesnik.course.students.dto.category.CategoryDto;
 import by.kolesnik.course.students.entity.Category;
 import by.kolesnik.course.students.mapper.CategoryMapper;
 import by.kolesnik.course.students.service.CategoryService;
@@ -16,18 +19,18 @@ public class CategoriesFacade {
     private final CategoryService categoryservice;
     private final CategoryMapper categoryMapper;
 
-    public List<CategoryDto> getAll() {
-        return categoryservice.findAll().stream().map(categoryMapper::toDto).toList();
+    public List<CategoryGetDto> getAll() {
+        return categoryservice.findAll().stream().map(categoryMapper::toGetDto).toList();
     }
 
-    public CategoryDto add(CategoryDto dto) {
+    public CategoryGetDto add(CategoryAddDto dto) {
         final Category category = categoryMapper.toEntity(dto);
-        return categoryMapper.toDto(categoryservice.save(category));
+        return categoryMapper.toGetDto(categoryservice.save(category));
     }
 
-    public CategoryDto update(String categoryName, CategoryDto dto) {
+    public CategoryGetDto update(String categoryName, CategoryUpdateDto dto) {
         final Category category = categoryservice.findByName(categoryName);
         category.setName(dto.getName());
-        return categoryMapper.toDto(categoryservice.save(category));
+        return categoryMapper.toGetDto(categoryservice.save(category));
     }
 }

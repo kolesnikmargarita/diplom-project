@@ -1,9 +1,14 @@
 package by.kolesnik.course.students.controller;
 
-import by.kolesnik.course.students.dto.CategoryDto;
-import by.kolesnik.course.students.dto.CommodityDto;
-import by.kolesnik.course.students.dto.CommodityUpdateDto;
-import by.kolesnik.course.students.dto.UserDto;
+import by.kolesnik.course.students.controller.openapi.ShopOpenApi;
+import by.kolesnik.course.students.dto.category.CategoryAddDto;
+import by.kolesnik.course.students.dto.category.CategoryGetDto;
+import by.kolesnik.course.students.dto.category.CategoryUpdateDto;
+import by.kolesnik.course.students.dto.category.CategoryDto;
+import by.kolesnik.course.students.dto.commodity.CommodityAddDto;
+import by.kolesnik.course.students.dto.commodity.CommodityDto;
+import by.kolesnik.course.students.dto.commodity.CommodityGetDto;
+import by.kolesnik.course.students.dto.commodity.CommodityUpdateDto;
 import by.kolesnik.course.students.facade.CategoriesFacade;
 import by.kolesnik.course.students.facade.CommoditiesFacade;
 import lombok.RequiredArgsConstructor;
@@ -15,53 +20,61 @@ import java.util.List;
 @RestController
 @RequestMapping("/shop")
 @RequiredArgsConstructor
-public class ShopController {
+public class ShopController implements ShopOpenApi {
 
     private final CategoriesFacade categoriesFacade;
     private final CommoditiesFacade commoditiesFacade;
 
+    @Override
     @GetMapping
-    public List<CommodityDto> getAll() {
+    public List<CommodityGetDto> getAll() {
         return commoditiesFacade.getAll();
     }
 
+    @Override
     @GetMapping("/categories")
-    public List<CategoryDto> getCategories() {
+    public List<CategoryGetDto> getCategories() {
         return categoriesFacade.getAll();
     }
 
+    @Override
     @GetMapping("/categories/{categoryName}")
-    public List<CommodityDto> getCommodities(@PathVariable String categoryName) {
+    public List<CommodityGetDto> getCommodities(@PathVariable String categoryName) {
         return commoditiesFacade.findByCategory(categoryName);
     }
 
-    @PostMapping("/{category}")
+    @Override
+    @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public CategoryDto addCategory(@PathVariable CategoryDto category) {
+    public CategoryGetDto addCategory(@RequestBody CategoryAddDto category) {
         return categoriesFacade.add(category);
     }
 
+    @Override
     @PostMapping("/{categoryName}")
     @PreAuthorize("hasRole('ADMIN')")
-    public CommodityDto addCommodity(@PathVariable String categoryName, CommodityDto dto) {
+    public CommodityGetDto addCommodity(@PathVariable String categoryName, @RequestBody CommodityAddDto dto) {
         return commoditiesFacade.add(dto, categoryName);
     }
 
+    @Override
     @DeleteMapping("/{article}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteCommodity(@PathVariable Integer article) {
         commoditiesFacade.delete(article);
     }
 
+    @Override
     @PatchMapping("/{article}")
     @PreAuthorize("hasRole('ADMIN')")
-    public CommodityDto updateCommodity(@PathVariable Integer article, CommodityUpdateDto dto) {
+    public CommodityGetDto updateCommodity(@PathVariable Integer article, @RequestBody CommodityUpdateDto dto) {
         return commoditiesFacade.update(article, dto);
     }
 
+    @Override
     @PutMapping("/{categoryName}")
     @PreAuthorize("hasRole('ADMIN')")
-    public CategoryDto updateCategory(@PathVariable String categoryName, CategoryDto dto) {
+    public CategoryGetDto updateCategory(@PathVariable String categoryName, @RequestBody CategoryUpdateDto dto) {
         return categoriesFacade.update(categoryName, dto);
     }
 }

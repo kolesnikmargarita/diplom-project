@@ -4,6 +4,7 @@ import by.kolesnik.course.students.controller.openapi.AuthOpenApi;
 import by.kolesnik.course.students.dto.LoginRequestDto;
 import by.kolesnik.course.students.dto.RegisterRequestDto;
 import by.kolesnik.course.students.dto.TokenResponseDto;
+import by.kolesnik.course.students.dto.UserRegistrationDto;
 import by.kolesnik.course.students.facade.AuthFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class AuthController implements AuthOpenApi {
         return authFacade.login(dto);
     }
 
+    @Override
     @PostMapping("/registration")
     public TokenResponseDto register(@RequestBody RegisterRequestDto dto) {
 

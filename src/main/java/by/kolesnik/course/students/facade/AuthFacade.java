@@ -1,8 +1,10 @@
 package by.kolesnik.course.students.facade;
 
+import by.kolesnik.course.students.Role;
 import by.kolesnik.course.students.dto.LoginRequestDto;
 import by.kolesnik.course.students.dto.RegisterRequestDto;
 import by.kolesnik.course.students.dto.TokenResponseDto;
+import by.kolesnik.course.students.dto.UserRegistrationDto;
 import by.kolesnik.course.students.entity.User;
 import by.kolesnik.course.students.mapper.UserMapper;
 import by.kolesnik.course.students.service.AuthService;
@@ -35,8 +37,11 @@ public class AuthFacade {
         final User user = UserMapper.toEntity(dto);
 
         // создание пользователя
+        user.setRole(Role.ROLE_USER);
         userService.createUser(user);
+
         authService.login(user.getEmail(), user.getPassword());
+
 
         // token generation
         return jwtService.generateToken(user.getEmail());

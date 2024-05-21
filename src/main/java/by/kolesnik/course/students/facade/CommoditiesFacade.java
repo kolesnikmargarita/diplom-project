@@ -1,7 +1,9 @@
 package by.kolesnik.course.students.facade;
 
-import by.kolesnik.course.students.dto.CommodityDto;
-import by.kolesnik.course.students.dto.CommodityUpdateDto;
+import by.kolesnik.course.students.dto.commodity.CommodityAddDto;
+import by.kolesnik.course.students.dto.commodity.CommodityDto;
+import by.kolesnik.course.students.dto.commodity.CommodityGetDto;
+import by.kolesnik.course.students.dto.commodity.CommodityUpdateDto;
 import by.kolesnik.course.students.entity.Category;
 import by.kolesnik.course.students.entity.Commodity;
 import by.kolesnik.course.students.mapper.CommodityMapper;
@@ -20,21 +22,21 @@ public class CommoditiesFacade {
     private final CategoryService categoryService;
     private final CommodityMapper commodityMapper;
 
-    public List<CommodityDto> getAll() {
-        return commodityService.findAll().stream().map(commodityMapper::toDto).toList();
+    public List<CommodityGetDto> getAll() {
+        return commodityService.findAll().stream().map(commodityMapper::toGetDto).toList();
     }
 
-    public List<CommodityDto> findByCategory(String categoryName) {
+    public List<CommodityGetDto> findByCategory(String categoryName) {
         final Category category = categoryService.findByName(categoryName);
         final List<Commodity> commodities = commodityService.findByCategory(category);
-        return commodities.stream().map(commodityMapper::toDto).toList();
+        return commodities.stream().map(commodityMapper::toGetDto).toList();
     }
 
-    public CommodityDto add(CommodityDto dto, String categoryName) {
+    public CommodityGetDto add(CommodityAddDto dto, String categoryName) {
         final Category category = categoryService.findByName(categoryName);
-        dto.setCategory(category);
         final Commodity commodity = commodityMapper.toEntity(dto);
-        return commodityMapper.toDto(commodityService.save(commodity));
+        commodity.setCategory(category);
+        return commodityMapper.toGetDto(commodityService.save(commodity));
     }
 
     public void delete(Integer article) {
@@ -42,7 +44,7 @@ public class CommoditiesFacade {
         commodityService.delete(commodity);
     }
 
-    public CommodityDto update(Integer article, CommodityUpdateDto dto) {
+    public CommodityGetDto update(Integer article, CommodityUpdateDto dto) {
         final Commodity commodity = commodityService.findByArticle(article);
 
         if(dto.getName() != null) {
@@ -61,6 +63,6 @@ public class CommoditiesFacade {
 
         commodityService.save(commodity);
 
-        return commodityMapper.toDto(commodity);
+        return commodityMapper.toGetDto(commodity);
     }
 }

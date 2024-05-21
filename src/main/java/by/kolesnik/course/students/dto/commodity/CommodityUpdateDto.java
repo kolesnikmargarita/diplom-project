@@ -1,4 +1,4 @@
-package by.kolesnik.course.students.dto;
+package by.kolesnik.course.students.dto.commodity;
 
 import by.kolesnik.course.students.entity.Commodity;
 import lombok.Data;

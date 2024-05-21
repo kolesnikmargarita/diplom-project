@@ -1,9 +1,8 @@
 package by.kolesnik.course.students.facade;
 
-import by.kolesnik.course.students.dto.CommodityDto;
+import by.kolesnik.course.students.dto.commodity.CommodityGetDto;
 import by.kolesnik.course.students.entity.Commodity;
 import by.kolesnik.course.students.entity.User;
-import by.kolesnik.course.students.exception.EntityNotFoundException;
 import by.kolesnik.course.students.mapper.CommodityMapper;
 import by.kolesnik.course.students.service.CommodityService;
 import by.kolesnik.course.students.service.UserService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -28,19 +26,20 @@ public class CartFacade {
         return userService.findByEmail(name);
     }
 
-    public List<CommodityDto> findAll() {
+    public List<CommodityGetDto> findAll() {
         final User user = findByEmail();
         Collection<Commodity> commodities = user.getCommodities();
-        return commodities.stream().map(commodityMapper::toDto).toList();
+        return commodities.stream().map(commodityMapper::toGetDto).toList();
     }
 
-    public CommodityDto add(Integer article) {
+    public CommodityGetDto add(Integer article) {
         final User user = findByEmail();
         final Commodity commodity = commodityService.findByArticle(article);
         final Collection<Commodity> commodities = user.getCommodities();
         commodities.add(commodity);
         user.setCommodities(commodities);
-        return commodityMapper.toDto(commodity);
+        userService.updateUser(user);
+        return commodityMapper.toGetDto(commodity);
     }
 
     public void delete(Integer article) {
@@ -49,5 +48,6 @@ public class CartFacade {
         final Collection<Commodity> commodities = user.getCommodities();
         commodities.remove(commodity);
         user.setCommodities(commodities);
+        userService.updateUser(user);
     }
 }
