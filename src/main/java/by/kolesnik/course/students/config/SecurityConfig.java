@@ -43,8 +43,10 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/swagger-ui/index.html","/v3/api-docs", "/shop", "/shop/categories/**", "/shop/swagger-config").permitAll()
-                                .anyRequest().authenticated()
+                        /*request.requestMatchers("/swagger-ui/index.html","/v3/api-docs", "/shop", "/shop/categories/**", "/shop/swagger-config").permitAll()
+                                .anyRequest().authenticated()*/
+                        request.requestMatchers("/cart", "/edit/**").authenticated()
+                                .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

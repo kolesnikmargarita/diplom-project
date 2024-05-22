@@ -6,10 +6,13 @@ import by.kolesnik.course.students.dto.RegisterRequestDto;
 import by.kolesnik.course.students.dto.TokenResponseDto;
 import by.kolesnik.course.students.dto.UserRegistrationDto;
 import by.kolesnik.course.students.facade.AuthFacade;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@SecurityScheme(type = SecuritySchemeType.HTTP, name = "basicAuth", scheme = "bearer", bearerFormat = "bearer")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController implements AuthOpenApi {
