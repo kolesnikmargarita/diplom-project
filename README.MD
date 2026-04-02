@@ -1,71 +1,71 @@
-# Дипломный проект
+# Graduation project
 
-## Суть проекта:
+## The essence of the project:
 
-Данный проект предоставляет возможность хранить информацию о товарах по категориям, просматривать информацию. Авторизованные пользователи могут добавлять товары в корзину, удалять их от туда и просматривать информацию о товарах, добавленных ими в корзину.
-Проект содержит роли администратора и пользователя. Пользователь с правами администратора имеет возможность добавлять товары и категории, редактировать их, удалять товары.
+This project allows you to store product information by category and view it. Authorized users can add and remove products from their cart, and view information about the products they've added to their cart.
+The project includes administrator and user roles. Administrators can add, edit, and delete products and categories.
 
-## Запуск приложения
+## Launching the application
 
-Развернуть и запустить приложение можно с помощью Intellij Idea Ultimate или Docker, Docker Compose.
+You can deploy and launch the application using IntelliJ IDEA Ultimate or Docker, Docker Compose.
 
-Для запуска через Intellij Idea Ultimate нужно добавить следующие переменные среды и присвоить им соответствующие значения:
-1) SHOP_DB_HOST - хост для подключения к базе данных
-2) SHOP_DB_NAME - наименование базы данных
-3) SHOP_DB_USER - username для подключения к базе данных
-4) SHOP_DB_PASSWORD - пароль для подключения к базе данных
-После добавления переменных среды, запустить приложение.
+To launch via IntelliJ IDEA Ultimate, you need to add the following environment variables and assign them the appropriate values:
+1) SHOP_DB_HOST - host for connecting to the database
+2) SHOP_DB_NAME - database name
+3) SHOP_DB_USER - username for connecting to the database
+4) SHOP_DB_PASSWORD - password for connecting to the database
+After adding the environment variables you can launch the application.
 
-Для запуска через Docker Compose необходимо переименовать файл .evn.example в .evn либо создать файл .evn в той же папке, что и .evn.example. В файле .evn нужно инициализировать переменные из файла .evn.example соответствующими значениями. Далее нужно собрать образ с помощью maven->Lifecycle->package, загрузить его и запустить проект с помощью команд, указанных ниже.
+For launching via Docker Compose you need to rename the .evn.example file to .evn oк create a .evn file  in the same folder as .evn.example. In the .evn file, you need to initialize the variables from the .evn.example file with the appropriate values. Next, you need to build the image using Maven->Lifecycle->package, upload it, and run the project using the commands below.
 
-## Загрузить образ:
+## Upload image:
 
 ```shell
 docker build -t diplom-project .
 ```
 
-## Развернуть используя Docker Compose:
+## Deploy with Docker Compose:
 ```shell
 docker compose up backend -d
 ```
 
-## Остановить работу проекта:
+## Stop the project:
 
 ```shell
 docker compose down
 ```
 
-##Эндпоинты:
+##Endpoints:
 
-Запросы, не требующие авторизации:
-POST-запросы:
-http://localhost:8080/auth/registration - регистрация пользователя
-http://localhost:8080/auth/login - авторизация пользователя
-GET-запросы:
-http://localhost:8080/shop - вывод списка всех товаров
-http://localhost:8080/shop/categories - вывод списка категорий товаров
-http://localhost:8080/shop/{categoryName} - вывод списка товаров категории с названием {categoryName}
+Requests that do not require authorization:
+POST-requests:
+http://localhost:8080/auth/registration - user registration
+http://localhost:8080/auth/login - user authorization
+GET-requests:
+http://localhost:8080/shop - product list
+http://localhost:8080/shop/categories - product categories
+http://localhost:8080/shop/{categoryName} - product list of category named {categoryName}
 
-Запросы, доступные авторизованному пользователю:
-POST-запрос:
-http://localhost:8080/cart/{article} - добавить товар с артикулом {article} в корзину текущего пользователя
-DELETE-запрос:
-http://localhost:8080/cart/{article} - удалить товар с артикулом {article} из корзины текущего пользователя
-GET-запрос:
-http://localhost:8080/cart - вывод списка товаров, добавленных в корзину текущим пользователем
+Requests available to an authorized user:
+POST-request:
+http://localhost:8080/cart/{article} - add product with article number {article} to the current user's cart
+DELETE-request:
+http://localhost:8080/cart/{article} - Remove item with article number {article} from the current user's cart
+GET-request:
+http://localhost:8080/cart - display a list of products added to the cart by the current user
 
-Запросы, доступные авторизованным пользователями, обладающим правами администратора
-POST-запросы:
-http://localhost:8080/edit/{categoryName} - добавить новый товар в базу данных
-http://localhost:8080/edit - добавить новую категорию в базу данных
-PUT-запрос:
-http://localhost:8080/edit/{categoryName} - изменить информацию о категории с наименованием {categoryName}
-PATCH-запрос:
-http://localhost:8080/edit/{article} - изменить информацию о товаре, с артикулом {article}
-DELETE-запрос:
-http://localhost:8080/edit/{article} - удалить товар с артикулом {article}
+Requests available to authorized users with administrator rights
+POST-requests:
+http://localhost:8080/edit/{categoryName} - add a new product to the database
+http://localhost:8080/edit - add a new category to the database
+PUT-request:
+http://localhost:8080/edit/{categoryName} - edit information about the category named {categoryName}
+PATCH-request:
+http://localhost:8080/edit/{article} - edit product information with article number {article}
+DELETE-request:
+http://localhost:8080/edit/{article} - delete product with article number {article}
 
-Более подробную информацию можно найти в документации swagger по ссылке (страница доступна во время работы проекта):
+More detailed information can be found in the swagger documentation at this link (the page is available while project is run):
 http://localhost:8080/swagger-ui/index.html
 
-Отправлять запросы можно при помощи postman
+You can send instructions using the postman
