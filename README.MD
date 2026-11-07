@@ -16,7 +16,7 @@ To launch via IntelliJ IDEA Ultimate, you need to add the following environment 
 4) SHOP_DB_PASSWORD - password for connecting to the database
 After adding the environment variables you can launch the application.
 
-For launching via Docker Compose you need to rename the .env.example file to .env oк create a .env file  in the same folder as .env.example. In the .env file, you need to initialize the variables from the .env.example file with the appropriate values. Next, you need to build the image using Maven->Lifecycle->package, upload it, and run the project using the commands below.
+For launching via Docker Compose you need to rename the .env.example file to .env or create a .env file  in the same folder as .env.example. In the .env file, you need to initialize the variables from the .env.example file with the appropriate values. Next, you need to build the image using Maven->Lifecycle->package, upload it, and run the project using the commands below.
 
 ## Upload image:
 
